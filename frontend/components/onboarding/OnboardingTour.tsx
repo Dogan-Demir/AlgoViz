@@ -98,13 +98,14 @@ export default function OnboardingTour() {
 
   const handleSkip = () => completeTour();
 
+  // Allow guests to use the tour too — just don't save completion to the backend
   if (!isActive || !step || !targetRect) return null;
 
   // Tooltip position relative to spotlight
   const tooltipStyle = getTooltipStyle(targetRect, step.placement);
 
   return (
-    <div className="pointer-events-none fixed inset-0 z-[9990]">
+    <div className="pointer-events-none fixed inset-0 z-[9990] overflow-hidden">
       {/* Dark overlay using box-shadow — the "hole" is the spotlight div itself */}
       <motion.div
         key={step.id}
@@ -192,32 +193,49 @@ export default function OnboardingTour() {
 function getTooltipStyle(rect: Rect, placement: string): React.CSSProperties {
   const GAP = 16;
   const TOOLTIP_WIDTH = 288;
+  const TOOLTIP_HEIGHT = 230; // conservative max height
+  const MARGIN = 8; // min distance from viewport edge
 
+  const vw = typeof window !== 'undefined' ? window.innerWidth : 1200;
+  const vh = typeof window !== 'undefined' ? window.innerHeight : 800;
+
+  // Clamp helpers
+  const clampLeft = (l: number) => Math.min(Math.max(MARGIN, l), vw - TOOLTIP_WIDTH - MARGIN);
+  const clampTop = (t: number) => Math.min(Math.max(MARGIN, t), vh - TOOLTIP_HEIGHT - MARGIN);
+
+  const centredLeft = rect.left + rect.width / 2 - TOOLTIP_WIDTH / 2;
+
+  // For each placement, if the tooltip would overflow that side, flip to the opposite
   switch (placement) {
-    case 'bottom':
-      return {
-        top: rect.top + rect.height + GAP,
-        left: Math.max(8, rect.left + rect.width / 2 - TOOLTIP_WIDTH / 2),
-      };
-    case 'top':
-      return {
-        top: rect.top - GAP - 200, // approximate tooltip height
-        left: Math.max(8, rect.left + rect.width / 2 - TOOLTIP_WIDTH / 2),
-      };
-    case 'left':
-      return {
-        top: rect.top,
-        left: Math.max(8, rect.left - TOOLTIP_WIDTH - GAP),
-      };
-    case 'right':
-      return {
-        top: rect.top,
-        left: rect.left + rect.width + GAP,
-      };
+    case 'bottom': {
+      const wouldOverflow = rect.top + rect.height + GAP + TOOLTIP_HEIGHT > vh - MARGIN;
+      const top = wouldOverflow
+        ? clampTop(rect.top - GAP - TOOLTIP_HEIGHT)
+        : rect.top + rect.height + GAP;
+      return { top: clampTop(top), left: clampLeft(centredLeft) };
+    }
+    case 'top': {
+      const wouldOverflow = rect.top - GAP - TOOLTIP_HEIGHT < MARGIN;
+      const top = wouldOverflow
+        ? rect.top + rect.height + GAP
+        : rect.top - GAP - TOOLTIP_HEIGHT;
+      return { top: clampTop(top), left: clampLeft(centredLeft) };
+    }
+    case 'left': {
+      const wouldOverflow = rect.left - TOOLTIP_WIDTH - GAP < MARGIN;
+      const left = wouldOverflow
+        ? rect.left + rect.width + GAP
+        : rect.left - TOOLTIP_WIDTH - GAP;
+      return { top: clampTop(rect.top), left: clampLeft(left) };
+    }
+    case 'right': {
+      const wouldOverflow = rect.left + rect.width + GAP + TOOLTIP_WIDTH > vw - MARGIN;
+      const left = wouldOverflow
+        ? rect.left - TOOLTIP_WIDTH - GAP
+        : rect.left + rect.width + GAP;
+      return { top: clampTop(rect.top), left: clampLeft(left) };
+    }
     default:
-      return {
-        top: rect.top + rect.height + GAP,
-        left: rect.left,
-      };
+      return { top: clampTop(rect.top + rect.height + GAP), left: clampLeft(centredLeft) };
   }
 }
