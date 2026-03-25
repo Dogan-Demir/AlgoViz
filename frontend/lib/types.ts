@@ -116,6 +116,21 @@ export interface CreateRunRequest {
   input: Record<string, unknown>;
 }
 
+// Auth types
+export interface User {
+  id: number;
+  email: string;
+  has_completed_onboarding: boolean;
+  avatar_url: string;
+  created_at: string;
+}
+
+export interface AuthTokens {
+  access: string;
+  refresh: string;
+  user: User;
+}
+
 // API response types
 export interface AlgorithmsListResponse {
   algorithms: AlgorithmListItem[];
