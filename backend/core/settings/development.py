@@ -44,13 +44,13 @@ CORS_ALLOW_HEADERS = [
     "x-requested-with",
 ]
 
-# Add browsable API in development
+# Add browsable API in development (extend base REST_FRAMEWORK to keep auth classes)
+from .base import REST_FRAMEWORK as _BASE_RF  # noqa: E402
+
 REST_FRAMEWORK = {
+    **_BASE_RF,
     "DEFAULT_RENDERER_CLASSES": [
         "rest_framework.renderers.JSONRenderer",
         "rest_framework.renderers.BrowsableAPIRenderer",
-    ],
-    "DEFAULT_PARSER_CLASSES": [
-        "rest_framework.parsers.JSONParser",
     ],
 }

@@ -29,10 +29,17 @@ INSTALLED_APPS = [
     "rest_framework",
     "corsheaders",
     # Local apps
+    "users",
     "algorithms",
     "runs",
     "streaming",
 ]
+
+# Custom user model — must be set before the first migration
+AUTH_USER_MODEL = "users.CustomUser"
+
+# Use email for login instead of username
+AUTHENTICATION_BACKENDS = ["users.backends.EmailBackend"]
 
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
@@ -101,7 +108,28 @@ REST_FRAMEWORK = {
     "DEFAULT_PARSER_CLASSES": [
         "rest_framework.parsers.JSONParser",
     ],
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ],
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.IsAuthenticatedOrReadOnly",
+    ],
 }
+
+from datetime import timedelta
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=30),
+    "ROTATE_REFRESH_TOKENS": True,
+    "BLACKLIST_AFTER_ROTATION": False,
+    "AUTH_HEADER_TYPES": ("Bearer",),
+    "USER_ID_FIELD": "id",
+    "USER_ID_CLAIM": "user_id",
+}
+
+# Google OAuth — set GOOGLE_CLIENT_ID in your .env file
+GOOGLE_CLIENT_ID = os.getenv("GOOGLE_CLIENT_ID", "")
 
 # Data upload limits
 DATA_UPLOAD_MAX_MEMORY_SIZE = 1024 * 100  # 100KB max request size
