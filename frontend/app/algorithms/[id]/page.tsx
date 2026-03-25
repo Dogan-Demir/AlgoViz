@@ -174,6 +174,7 @@ export default function AlgorithmViewerPage() {
             <div
               className="overflow-x-auto rounded-lg bg-white p-6 shadow"
               data-testid="array-visualizer"
+              data-tour="visualizer"
             >
               {currentStep ? (
                 <VisualizerFactory

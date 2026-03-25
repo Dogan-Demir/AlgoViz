@@ -12,7 +12,7 @@ interface InputPanelProps {
 
 export function InputPanel({ category, algorithmId, onSubmit, isLoading }: InputPanelProps) {
   return (
-    <div className="rounded-lg bg-white p-4 shadow">
+    <div className="rounded-lg bg-white p-4 shadow" data-tour="input-panel">
       <h3 className="mb-4 font-semibold text-slate-900">Input</h3>
       {category === 'sorting' && (
         <ArrayInput onSubmit={onSubmit} isLoading={isLoading} />

@@ -69,12 +69,13 @@ export default function AlgorithmsPage() {
           Select an algorithm to learn and visualize
         </p>
 
-        <div className="mt-8 space-y-4">
-          {algorithms.map((algo) => (
+        <div className="mt-8 space-y-4" data-tour="algorithm-list">
+          {algorithms.map((algo, index) => (
             <Link
               key={algo.id}
               href={`/algorithms/${algo.id}`}
               className="block rounded-lg bg-white p-6 shadow-sm transition-shadow hover:shadow-md"
+              {...(index === 0 ? { 'data-tour': 'algorithm-card' } : {})}
             >
               <div className="flex items-start justify-between">
                 <div>

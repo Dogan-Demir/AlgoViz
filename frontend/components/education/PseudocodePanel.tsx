@@ -11,7 +11,7 @@ export function PseudocodePanel() {
   const activeLines = currentStep?.pseudocodeLines ?? [];
 
   return (
-    <div className="rounded-lg bg-slate-900 p-4 font-mono text-sm" data-testid="pseudocode-panel">
+    <div className="rounded-lg bg-slate-900 p-4 font-mono text-sm" data-testid="pseudocode-panel" data-tour="pseudocode-panel">
       <h3 className="mb-3 text-xs uppercase tracking-wider text-slate-400">
         Pseudocode
       </h3>

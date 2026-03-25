@@ -78,7 +78,7 @@ export function PlaybackControls() {
   }, [handleKeyDown]);
 
   return (
-    <div className="flex flex-col gap-4 rounded-lg bg-white p-4 shadow">
+    <div className="flex flex-col gap-4 rounded-lg bg-white p-4 shadow" data-tour="playback-controls">
       {/* Progress bar */}
       <StepIndicator current={currentStepIndex} total={steps.length} onSeek={goToStep} />
 

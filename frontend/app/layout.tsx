@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import AuthInitializer from '@/components/auth/AuthInitializer';
 import Navbar from '@/components/nav/Navbar';
+import OnboardingTour from '@/components/onboarding/OnboardingTour';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -23,6 +24,7 @@ export default function RootLayout({
         <AuthInitializer />
         <Navbar />
         {children}
+        <OnboardingTour />
       </body>
     </html>
   );
