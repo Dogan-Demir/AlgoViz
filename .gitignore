@@ -56,9 +56,5 @@ Thumbs.db
 *.tmp
 *.temp
 
-# AI usage
-docs/
-README.md
-CLAUDE.md
-.claude/
-how_it_works.txt
+# TypeScript build info
+tsconfig.tsbuildinfo
