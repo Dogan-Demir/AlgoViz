@@ -3,6 +3,7 @@ Views for run endpoints.
 """
 
 from rest_framework import status
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -12,6 +13,8 @@ from .services import RunManager
 
 class CreateRunView(APIView):
     """Create a new algorithm run."""
+
+    permission_classes = [AllowAny]
 
     def post(self, request):
         serializer = CreateRunSerializer(data=request.data)
@@ -50,6 +53,8 @@ class CreateRunView(APIView):
 class RunDetailView(APIView):
     """Get run metadata."""
 
+    permission_classes = [AllowAny]
+
     def get(self, request, run_id):
         run_manager = RunManager()
         run = run_manager.get_run(run_id)
@@ -76,6 +81,8 @@ class RunDetailView(APIView):
 
 class RunControlView(APIView):
     """Pause or resume a run."""
+
+    permission_classes = [AllowAny]
 
     def post(self, request, run_id):
         serializer = RunControlSerializer(data=request.data)
@@ -120,6 +127,8 @@ class RunControlView(APIView):
 
 class RunStepsView(APIView):
     """Get steps for a run (optional replay endpoint)."""
+
+    permission_classes = [AllowAny]
 
     def get(self, request, run_id):
         run_manager = RunManager()
