@@ -77,9 +77,10 @@ export function ArrayVisualizer({ state, highlights }: ArrayVisualizerProps) {
 
               <text
                 x={BAR_WIDTH / 2}
-                y={y - 8}
+                y={y < 20 ? y + 16 : y - 8}
                 textAnchor="middle"
-                className="fill-slate-700 text-sm font-mono"
+                dominantBaseline={y < 20 ? 'hanging' : 'auto'}
+                className={y < 20 ? 'fill-white text-sm font-mono' : 'fill-slate-700 text-sm font-mono'}
               >
                 {value}
               </text>
