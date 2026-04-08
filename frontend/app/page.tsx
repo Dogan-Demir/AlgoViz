@@ -1,6 +1,24 @@
+'use client';
+
+import { useEffect } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useAuthStore } from '@/stores/authStore';
 
 export default function Home() {
+  const router = useRouter();
+  const { isAuthenticated, isLoading } = useAuthStore();
+
+  useEffect(() => {
+    if (!isLoading && isAuthenticated) {
+      router.replace('/dashboard');
+    }
+  }, [isLoading, isAuthenticated, router]);
+
+  // Don't flash the landing page while we check auth
+  if (isLoading) return null;
+  if (isAuthenticated) return null;
+
   return (
     <main className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100">
       <div className="mx-auto max-w-4xl px-4 py-16">
@@ -13,10 +31,10 @@ export default function Home() {
             Learn algorithms through step-by-step visualizations
           </p>
 
-          <div className="mt-12">
+          <div className="mt-12 flex items-center justify-center gap-4">
             <Link
               href="/algorithms"
-              className="inline-flex items-center rounded-lg bg-blue-600 px-8 py-4 text-lg font-semibold text-white transition-colors hover:bg-blue-700"
+              className="inline-flex items-center rounded-lg bg-indigo-600 px-8 py-4 text-lg font-semibold text-white transition-colors hover:bg-indigo-700"
             >
               Explore Algorithms
               <svg
@@ -33,14 +51,20 @@ export default function Home() {
                 />
               </svg>
             </Link>
+            <Link
+              href="/signup"
+              className="inline-flex items-center rounded-lg border border-slate-300 bg-white px-8 py-4 text-lg font-semibold text-slate-700 transition-colors hover:bg-slate-50"
+            >
+              Sign up free
+            </Link>
           </div>
         </div>
 
         <div className="mt-20 grid gap-8 md:grid-cols-3">
           <div className="rounded-lg bg-white p-6 shadow-sm">
-            <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-blue-100">
+            <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-indigo-100">
               <svg
-                className="h-6 w-6 text-blue-600"
+                className="h-6 w-6 text-indigo-600"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"

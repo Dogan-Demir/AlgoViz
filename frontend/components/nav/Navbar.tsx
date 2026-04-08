@@ -19,7 +19,10 @@ export default function Navbar() {
     <nav className="border-b border-slate-200 bg-white">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3">
         {/* Logo */}
-        <Link href="/" className="text-lg font-bold text-slate-800 hover:text-indigo-600 transition-colors">
+        <Link
+          href={isAuthenticated ? '/dashboard' : '/'}
+          className="text-lg font-bold text-slate-800 hover:text-indigo-600 transition-colors"
+        >
           AlgoViz
         </Link>
 

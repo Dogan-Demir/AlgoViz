@@ -70,7 +70,7 @@ export default function SignupPage() {
     try {
       const data = await api.googleAuth(response.credential);
       setAuth(data.user, data.access, data.refresh);
-      router.push('/algorithms');
+      router.push('/dashboard');
     } catch (err) {
       if (err instanceof ApiError) {
         setError(err.message);
@@ -90,7 +90,7 @@ export default function SignupPage() {
     try {
       const data = await api.register({ email, password });
       setAuth(data.user, data.access, data.refresh);
-      router.push('/algorithms');
+      router.push('/dashboard');
     } catch (err) {
       if (err instanceof ApiError) {
         const detail = (err.details as Record<string, string[]> | undefined);
