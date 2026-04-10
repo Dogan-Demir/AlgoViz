@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     "algorithms",
     "runs",
     "streaming",
+    "quizzes",
 ]
 
 # Custom user model — must be set before the first migration
