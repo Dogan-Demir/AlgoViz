@@ -142,21 +142,21 @@ export default function DashboardPage() {
             <div className="rounded-xl bg-white shadow-sm border border-slate-200 p-6">
               <div className="flex items-center justify-between mb-3">
                 <h2 className="text-lg font-semibold text-slate-900">Quizzes & Challenges</h2>
-                <span className="rounded-full bg-amber-100 px-2.5 py-0.5 text-xs font-medium text-amber-700">
-                  Coming soon
-                </span>
               </div>
               <p className="text-sm text-slate-500">
                 Test your knowledge with algorithm quizzes and interactive step-by-step challenges.
               </p>
               <div className="mt-4 grid grid-cols-2 gap-2">
-                <div className="rounded-lg bg-indigo-50 p-3 text-center">
-                  <div className="text-2xl font-bold text-indigo-600">—</div>
-                  <div className="text-xs text-indigo-500 mt-0.5">Quizzes taken</div>
-                </div>
+                <Link
+                  href="/quiz"
+                  className="rounded-lg bg-indigo-50 p-3 text-center hover:bg-indigo-100 transition-colors"
+                >
+                  <div className="text-2xl font-bold text-indigo-600">Quiz</div>
+                  <div className="text-xs text-indigo-500 mt-0.5">Take a quiz →</div>
+                </Link>
                 <div className="rounded-lg bg-purple-50 p-3 text-center">
                   <div className="text-2xl font-bold text-purple-600">—</div>
-                  <div className="text-xs text-purple-500 mt-0.5">Challenges done</div>
+                  <div className="text-xs text-purple-500 mt-0.5">Challenges soon</div>
                 </div>
               </div>
             </div>

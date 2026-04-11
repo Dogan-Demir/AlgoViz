@@ -131,6 +131,51 @@ export interface AuthTokens {
   user: User;
 }
 
+// Quiz types
+export interface QuizQuestion {
+  id: number;
+  algorithm_id: string;
+  question_type: 'multiple_choice' | 'step_prediction' | 'complexity' | 'scenario';
+  difficulty: 'easy' | 'medium' | 'hard';
+  question_text: string;
+  options: string[];
+  points: number;
+}
+
+export interface AnswerResult {
+  question_id: number;
+  correct: boolean;
+  correct_answer: number;
+  explanation: string;
+  points_earned: number;
+}
+
+export interface QuizAttemptResult {
+  score: number;
+  max_score: number;
+  correct_count: number;
+  total_questions: number;
+  results: AnswerResult[];
+  new_total_score: number;
+  current_streak: number;
+}
+
+export interface UserProgress {
+  algorithm_id: string;
+  quizzes_passed: number;
+  challenges_completed: number;
+  is_confident: boolean;
+  is_completed: boolean;
+  last_activity: string;
+}
+
+export interface LeaderboardEntry {
+  rank: number;
+  email: string;
+  total_score: number;
+  current_streak: number;
+}
+
 // API response types
 export interface AlgorithmsListResponse {
   algorithms: AlgorithmListItem[];

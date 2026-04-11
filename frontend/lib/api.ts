@@ -5,8 +5,12 @@ import type {
   AlgorithmsListResponse,
   AuthTokens,
   CreateRunRequest,
+  LeaderboardEntry,
+  QuizAttemptResult,
+  QuizQuestion,
   RunMetadata,
   User,
+  UserProgress,
 } from './types';
 
 class ApiError extends Error {
@@ -121,6 +125,35 @@ export const api = {
       method: 'POST',
       body: JSON.stringify({ refresh }),
     });
+  },
+
+  // Quiz
+  async getQuizQuestions(algorithmIds: string[]): Promise<QuizQuestion[]> {
+    return fetchApi<QuizQuestion[]>(
+      `/api/quizzes/questions/?algorithms=${algorithmIds.join(',')}`
+    );
+  },
+
+  async submitQuiz(answers: { question_id: number; selected_answer: number }[]): Promise<QuizAttemptResult> {
+    return fetchApi<QuizAttemptResult>('/api/quizzes/submit/', {
+      method: 'POST',
+      body: JSON.stringify({ answers }),
+    });
+  },
+
+  async getProgress(): Promise<UserProgress[]> {
+    return fetchApi<UserProgress[]>('/api/quizzes/progress/');
+  },
+
+  async setConfident(algorithmId: string, isConfident: boolean): Promise<UserProgress> {
+    return fetchApi<UserProgress>(`/api/quizzes/progress/${algorithmId}/`, {
+      method: 'PATCH',
+      body: JSON.stringify({ is_confident: isConfident }),
+    });
+  },
+
+  async getLeaderboard(type: 'score' | 'streak' = 'score'): Promise<LeaderboardEntry[]> {
+    return fetchApi<LeaderboardEntry[]>(`/api/quizzes/leaderboard/?type=${type}`);
   },
 };
 
