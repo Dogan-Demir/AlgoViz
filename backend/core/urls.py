@@ -11,4 +11,5 @@ urlpatterns = [
     path("api/", include("algorithms.urls")),
     path("api/", include("runs.urls")),
     path("api/", include("streaming.urls")),
+    path("api/", include("quizzes.urls")),
 ]
