@@ -154,10 +154,13 @@ export default function DashboardPage() {
                   <div className="text-2xl font-bold text-indigo-600">Quiz</div>
                   <div className="text-xs text-indigo-500 mt-0.5">Take a quiz →</div>
                 </Link>
-                <div className="rounded-lg bg-purple-50 p-3 text-center">
-                  <div className="text-2xl font-bold text-purple-600">—</div>
-                  <div className="text-xs text-purple-500 mt-0.5">Challenges soon</div>
-                </div>
+                <Link
+                  href="/challenge"
+                  className="rounded-lg bg-purple-50 p-3 text-center hover:bg-purple-100 transition-colors"
+                >
+                  <div className="text-2xl font-bold text-purple-600">Challenge</div>
+                  <div className="text-xs text-purple-500 mt-0.5">Try one →</div>
+                </Link>
               </div>
             </div>
 
