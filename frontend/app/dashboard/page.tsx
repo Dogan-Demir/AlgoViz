@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useAuthStore } from '@/stores/authStore';
 import ProgressPanel from '@/components/dashboard/ProgressPanel';
+import LeaderboardPanel from '@/components/dashboard/LeaderboardPanel';
 import { api } from '@/lib/api';
 import { CATEGORY_COLORS, CATEGORY_LABELS } from '@/lib/constants';
 import type { AlgorithmListItem } from '@/lib/types';
@@ -169,25 +170,7 @@ export default function DashboardPage() {
             <ProgressPanel algorithms={algorithms} />
 
             {/* Leaderboard */}
-            <div className="rounded-xl bg-white shadow-sm border border-slate-200 p-6">
-              <div className="flex items-center justify-between mb-3">
-                <h2 className="text-lg font-semibold text-slate-900">Leaderboard</h2>
-                <span className="rounded-full bg-amber-100 px-2.5 py-0.5 text-xs font-medium text-amber-700">
-                  Coming soon
-                </span>
-              </div>
-              <p className="text-sm text-slate-500">
-                See how you rank globally on quiz score and streak.
-              </p>
-              <div className="mt-4 space-y-2">
-                {['🥇', '🥈', '🥉'].map((medal, i) => (
-                  <div key={i} className="flex items-center gap-2 rounded-lg bg-slate-50 px-3 py-2">
-                    <span>{medal}</span>
-                    <div className="h-2.5 flex-1 rounded-full bg-slate-200" />
-                  </div>
-                ))}
-              </div>
-            </div>
+            <LeaderboardPanel />
 
             {/* Roadmap */}
             <div className="rounded-xl bg-white shadow-sm border border-slate-200 p-6">
