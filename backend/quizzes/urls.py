@@ -6,6 +6,7 @@ from .views import (
     QuizSubmitView,
     UserProgressDetailView,
     UserProgressView,
+    UserStatsView,
 )
 
 urlpatterns = [
@@ -14,4 +15,5 @@ urlpatterns = [
     path("quizzes/progress/", UserProgressView.as_view(), name="quiz-progress"),
     path("quizzes/progress/<str:algorithm_id>/", UserProgressDetailView.as_view(), name="quiz-progress-detail"),
     path("quizzes/leaderboard/", LeaderboardView.as_view(), name="quiz-leaderboard"),
+    path("quizzes/stats/", UserStatsView.as_view(), name="quiz-stats"),
 ]

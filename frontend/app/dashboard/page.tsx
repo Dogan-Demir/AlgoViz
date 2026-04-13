@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useAuthStore } from '@/stores/authStore';
+import ProgressPanel from '@/components/dashboard/ProgressPanel';
 import { api } from '@/lib/api';
 import { CATEGORY_COLORS, CATEGORY_LABELS } from '@/lib/constants';
 import type { AlgorithmListItem } from '@/lib/types';
@@ -165,26 +166,7 @@ export default function DashboardPage() {
             </div>
 
             {/* Progress */}
-            <div className="rounded-xl bg-white shadow-sm border border-slate-200 p-6">
-              <div className="flex items-center justify-between mb-3">
-                <h2 className="text-lg font-semibold text-slate-900">Progress</h2>
-                <span className="rounded-full bg-amber-100 px-2.5 py-0.5 text-xs font-medium text-amber-700">
-                  Coming soon
-                </span>
-              </div>
-              <p className="text-sm text-slate-500">
-                Track your mastery of each algorithm and maintain your learning streak.
-              </p>
-              <div className="mt-4 flex items-center gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-orange-100">
-                  <span className="text-lg">🔥</span>
-                </div>
-                <div>
-                  <div className="text-sm font-semibold text-slate-700">— day streak</div>
-                  <div className="text-xs text-slate-400">Start learning to build your streak</div>
-                </div>
-              </div>
-            </div>
+            <ProgressPanel algorithms={algorithms} />
 
             {/* Leaderboard */}
             <div className="rounded-xl bg-white shadow-sm border border-slate-200 p-6">

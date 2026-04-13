@@ -193,6 +193,23 @@ class UserProgressDetailView(APIView):
         return Response(UserProgressSerializer(progress).data)
 
 
+class UserStatsView(APIView):
+    """
+    GET /api/quizzes/stats/
+    Returns the current user's score, streak and longest streak.
+    """
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        stats = _get_or_create_stats(request.user)
+        return Response({
+            "total_score": stats.total_score,
+            "current_streak": stats.current_streak,
+            "longest_streak": stats.longest_streak,
+            "last_activity_date": stats.last_activity_date,
+        })
+
+
 class LeaderboardView(APIView):
     """
     GET /api/quizzes/leaderboard/?type=score|streak

@@ -169,6 +169,13 @@ export interface UserProgress {
   last_activity: string;
 }
 
+export interface UserStats {
+  total_score: number;
+  current_streak: number;
+  longest_streak: number;
+  last_activity_date: string | null;
+}
+
 export interface LeaderboardEntry {
   rank: number;
   email: string;

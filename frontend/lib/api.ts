@@ -11,6 +11,7 @@ import type {
   RunMetadata,
   User,
   UserProgress,
+  UserStats,
 } from './types';
 
 class ApiError extends Error {
@@ -154,6 +155,10 @@ export const api = {
 
   async getLeaderboard(type: 'score' | 'streak' = 'score'): Promise<LeaderboardEntry[]> {
     return fetchApi<LeaderboardEntry[]>(`/api/quizzes/leaderboard/?type=${type}`);
+  },
+
+  async getMyStats(): Promise<UserStats> {
+    return fetchApi<UserStats>('/api/quizzes/stats/');
   },
 };
 
